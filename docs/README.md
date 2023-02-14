@@ -1,6 +1,6 @@
-![Banner](https://github.com/dostr-eth/resources/blob/47685a8608e9abb1e3a2fea5976355d67af8ed23/graphics/banner.png)
+![Banner](https://raw.githubusercontent.com/dostr-eth/resources/master/graphics/banner.png)
 # Dostr Technical Design
-![Logo](https://github.com/dostr-eth/resources/blob/47685a8608e9abb1e3a2fea5976355d67af8ed23/graphics/icon.png)
+![Logo](https://raw.githubusercontent.com/dostr-eth/resources/master/graphics/icon.png)
 #### Authors:`sshmatrix`  & `c0de4c0ffee`
 #### Links: [[GitHub](https://github.com/dostr-eth)]  [[.ETH](https://dostr.eth.limo)]  [[.XYZ](https://dostr.xyz)] [[Goerli]()]
 ###### tags: `specification` `design` `architecture` `nostr` `dostr`
