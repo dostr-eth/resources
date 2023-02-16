@@ -1,14 +1,35 @@
 ![Banner](https://raw.githubusercontent.com/dostr-eth/resources/main/graphics/banner.png)
 # Dostr Technical Design
 ![Icon](https://raw.githubusercontent.com/dostr-eth/resources/main/graphics/icon.png)
-#### Authors:`sshmatrix`  & `c0de4c0ffee`
+#### Authors:`sshmatrix`  & `0xc0de4c0ffee`
 #### Links: [[GitHub](https://github.com/dostr-eth)]  [[.ETH](https://dostr.eth.limo)]  [[.XYZ](https://dostr.xyz)] [[Goerli]()]
 ###### tags: `specification` `design` `architecture` `nostr` `dostr`
 # DOSTR 🔘
 
+~~DO Signed-Tx-over Relay~~
+
+
+### tldr; 
+> Dostr is a Nostr client with Ethereum and ENS integration. Dostr is designed as an alternative to Whisper (ssh) on top of Nostr protocol.
+
+
+
+## Introduction : 
+
+Dostr is fully backwards compatible Nostr client with ENS and Ethereum integration. It's a collection of *experimental* specifications and implementations of Ethereum-aware Nostr clients to send and receive signed data/tx between users and services.
+
+
+## Background 
+~~In the beginning~~ Ethereum was originally designed as 3 in 1 protocol. Ethereum/EVM as main "processor", Swarm as "storage" system and Whisper as messaging protocol.
+![Icon](https://raw.githubusercontent.com/dostr-eth/resources/whisper/graphics/web3.png)
+
+
+ - NOSTR : Notes and Other Stuff Transmitted by Relays
+ - DOSTR : DO Stuff Transmitted by Relays
+
 ## Abstract
 
-Dostr is an Ethereum-flavoured [Nostr](https://github.com/nostr-protocol/nostr#readme) client. Dostr replaces the Bitcoin-native [Schnorr signature](https://bips.xyz/340) scheme of [Nostr](https://github.com/nostr-protocol/nips/blob/master/01.md) standard with Ethereum-native ECDSA signature scheme. This allows Nostr to function with Ethereum wallets and leverage properties of [ENS (Ethereum Name Service)](https://docs.ens.domains/) protocol in Dostr client infrastructure. Consequently, Dostr provides an optional side-stack of Ethereum-based services for Nostr users, e.g. allows them to use their ENS identity on Nostr or attach to [Helix2](https://github.com/helix-coupler/resources/blob/master/yellow-paper/README.md) as a submodule hook.
+Dostr is a collection of specifications and implementations of ENS+Ethereum-aware [Nostr](https://github.com/nostr-protocol/nostr#readme) client. Dostr is fully backwards compatible with Nostr specifications.. Dostr is using Nostr protocol as as alternative to Whisper (shh) to provide users with relay backed peer-to-peer messaging capabilities to the Ethereum network.Dostr replaces the Bitcoin-native [Schnorr signature](https://bips.xyz/340) scheme of [Nostr](https://github.com/nostr-protocol/nips/blob/master/01.md) standard with Ethereum-native ECDSA signature scheme. This allows Nostr to function with Ethereum wallets and leverage properties of [ENS (Ethereum Name Service)](https://docs.ens.domains/) protocol in Dostr client infrastructure. Consequently, Dostr provides an optional side-stack of Ethereum-based services for Nostr users, e.g. allows them to use their ENS identity on Nostr or attach to [Helix2](https://github.com/helix-coupler/resources/blob/master/yellow-paper/README.md) as a submodule hook.
 
 ## Introduction
 
