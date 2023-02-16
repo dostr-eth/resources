@@ -24,24 +24,19 @@ services.
 
 
 ## Background
-~~In the beginning~~ Ethereum was originally designed as 3 in 1 protocol. Ethereum/EVM as `consensus` mechanism, Swarm
-as `storage` system and Whisper as `messaging` protocol.
+Ethereum was originally designed as 3 in 1 protocol. Ethereum/EVM `consensus` mechanism, Swarm `storage` system and Whisper  `messaging` protocol. 
 ![Icon](https://raw.githubusercontent.com/0xc0de4c0ffee/resources/whisper/graphics/web3.png)
 
 
 - NOSTR : Notes and Other Stuff Transmitted by Relays
 - DOSTR : DO Signed Transaction-with Relays
 
-## Introduction
+## Abstract
 
-Dostr is a collection of specifications and implementations of Ethereum-aware
+~~Dostr is a collection of specifications and implementations of Ethereum-aware
 [Nostr](https://github.com/nostr-protocol/nostr#readme) client. Dostr is fully backwards compatible with Nostr
 specifications, .. Dostr is using Nostr protocol as as alternative to Whisper (shh). ..relay backed peer-to-peer
-messaging capabilities to the Ethereum network.
-
-
-
--
+messaging capabilities to the Ethereum network.~~
 
 ## Terminology
 ### a) `username`
@@ -68,7 +63,6 @@ let salt = await sha256(`eip155:${chainId}:${username}:${password?password:""}:$
 ```
 
 ### c) `message`
-
 ```js
 let message = `Login to Nostr as ${username}\n\nWARNING : DO NOT SIGN THIS REQUEST FROM UNTRUSTED NOSTR
 CLIENTS.\neip155:${chainId}:${username}:${address}`
@@ -78,9 +72,31 @@ Deterministic signature from connected wallet.
 ```js
 let signature = wallet.signMessage(message); 
 ```
-
+### e) `HKDF` 
+- Input key is sha256 of signature bytes.
+   ```js
+   let inputKey = await sha256(hexToBytes(signature.slice(2)));
+   ```
+- Salt is sha256 hash of following string. 
+   ```js
+   let salt = await sha256(`eip155:${chainId}:${username}:${password?password:""}:${signature.slice(68)}`);
+   ```
+- Info is string with following format.
+   ```js
+   let info = `eip155:${chainId}:${username}:${address}`;
+   ```
+- Derived Key Length is set to 42. FIPS 186/4 B.4.1 require hash length to be >=n+8 where, n is length of final private key. (42 >= 32 + 8)
+   ```js
+   let dkLen = 42; 
+   ```
+- Hash to Private key is FIPs 186/4 B.4.1 implementation to convert derived hash key to valid `secp256k1` private key. this function is implemented in `@noble/secp256k1`
+   ```js
+   let hashKey = hkdf(sha256, inputKey, salt, info, dkLen);
+   let privKey = secp256k1.hashToPrivateKey(hashKey);
+   let pubKey = secp256k1.getPublicKey(privKey);
+   ```
 ~~~
-## Introduction
+## Draft : scratchpad
 
 `Notes and Other Stuff Transmitted by Relays`, Nostr is a open peer-to-peer networking protocol with following
 properties:
