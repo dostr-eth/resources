@@ -8,9 +8,7 @@
 
 ## Abstract
 
-Dostr is an Ethereum-flavoured [Nostr](https://github.com/nostr-protocol/nostr#readme) client. Dostr is an alternative to the Bitcoin-native [Schnorr signatures](https://bips.xyz/340) over `secp256k1` [preferred by Nostr](https://github.com/nostr-protocol/nips/blob/master/01.md) standard with [Ethereum-native ECDSA signatures](https://eips.ethereum.org/EIPS/eip-191) over `secp256k1`. This allows Nostr to function with Ethereum wallets and leverage properties of [ENS (Ethereum Name Service)](https://docs.ens.domains/) protocol in Dostr client infrastructure, and vice-versa. Consequently, Dostr provides an optional side-stack of Ethereum-based services for Nostr users, e.g. allows them to use their ENS identity on Nostr or attach to [Helix2](https://github.com/helix-coupler/resources/blob/master/yellow-paper/README.md) as a submodule hook. Alternatively, Ethereum users may find that Dostr is similar to [Sign In With X (SIWx)](https://chainagnostic.org/CAIPs/caip-122) -- an alternative to SIWE.
-
-> pending some work to be done to bring Dostr up to standard with SIWx (CAIP-122)
+Dostr is an Ethereum-flavoured [Nostr](https://github.com/nostr-protocol/nostr#readme) client. Dostr is an alternative to the Bitcoin-native [Schnorr signatures](https://bips.xyz/340) over `secp256k1` [preferred by Nostr](https://github.com/nostr-protocol/nips/blob/master/01.md) standard with [Ethereum-native ECDSA signatures](https://eips.ethereum.org/EIPS/eip-191) over `secp256k1`. This allows Nostr to function with Ethereum wallets and leverage properties of [ENS (Ethereum Name Service)](https://docs.ens.domains/) protocol in Dostr client infrastructure, and vice-versa. Consequently, Dostr provides an optional side-stack of Ethereum-based services for Nostr users, e.g. allows them to use their ENS identity on Nostr or attach to [Helix2](https://github.com/helix-coupler/resources/blob/master/yellow-paper/README.md) as a submodule hook. Alternatively, Ethereum users may find that Dostr is a minimal implementation of [Sign In With X (SIWx)](https://chainagnostic.org/CAIPs/caip-122) -- an alternative to SIWE.
 
 ## Introduction
 
