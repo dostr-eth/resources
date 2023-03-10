@@ -24,7 +24,7 @@ Implementing an Ethereum-based side-stack to Nostr has several utilities. Firstl
 
 ## Protocol Design
 
-Dostr design is identitical to the Nostr specifications described in [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md) except for two main differences -  using ECDSA signatures to derive user keys, and use of ENS via a gateway to access the user properties instead of a web2 DNS server. The detailed NIP-69 proposal covering these two aspects can be found [here](https://github.com/dostr-eth/nips/blob/ethkeygen/xx.md). In summary, the Dostr implementation can be summarised with the following pseudo-code.
+Dostr design is identitical to the Nostr specifications described in [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md) except for two main differences -  using ECDSA signatures to derive user keys, and use of ENS via a gateway to access the user properties instead of a web2 DNS server. The detailed NIP-XX proposal currently under review covering these two aspects can be found [here](https://github.com/dostr-eth/nips/blob/ethkeygen/xx.md). In summary, the Dostr implementation can be summarised with the following pseudo-code.
 
 ### Private-key derivation
 
