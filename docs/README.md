@@ -4,7 +4,7 @@
 #### Authors:`sshmatrix`, `c0de4c0ffee`
 #### Links: [[GitHub](https://github.com/dostr-eth)]  [[.ETH](https://dostr.eth.limo)]  [[.XYZ](https://dostr.xyz)] [[Goerli]()]
 ###### tags: `specification` `design` `architecture` `nostr` `dostr`
-# DOSTR 🔘
+# DOSTR 📡
 
 ## Abstract
 
