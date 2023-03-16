@@ -18,7 +18,7 @@ Dostr is a Nostr client with Ethereum-based side-stack. To understand Dostr, one
 - Nostr clients have the ability to talk to relays and make requests for filtered information, which the relay fetches from another client and returns to the original requester.
 - Nostr clients are identified by their private keys and may have a **Petname**. Nostr clients must sign the information they send and relays must validate the information before transmitting it.
 
-![](https://raw.githubusercontent.com/dostr-eth/resources/main/graphics/dostr.png)
+![](https://raw.githubusercontent.com/dostr-eth/resources/main/graphics/nostr.png)
 
 More details about the Nostr protocol may be found [here](https://github.com/rajarshimaitra/rust-nostr/blob/main/VISION.md) (and [here](https://github.com/nostr-protocol/nips)). In native Nostr implementation, Schnorr signature scheme over `secp256k1` is used as per Bitcoin-native [BIP-340 standard](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki#design). Dostr adds to this standard by deriving the Nostr-specific private keys from Ethereum-native ECDSA signature scheme outlined in [EIP-191](https://eips.ethereum.org/EIPS/eip-191) and [EIP-712](https://eips.ethereum.org/EIPS/eip-712) using HMAC Key Derivation Function (HKDF). In Dostr clients, ENS names of the signing wallets become the petnames of the users.
 
@@ -27,6 +27,8 @@ Implementing an Ethereum-based side-stack to Nostr has several utilities. Firstl
 ## Protocol Design
 
 Dostr design is identitical to the Nostr specifications described in [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md) except for two main differences -  using ECDSA signatures to derive user keys, and use of ENS via a gateway to access the user properties instead of a web2 DNS server. The detailed [NIP-XX proposal](https://github.com/dostr-eth/nips/blob/ethkeygen/xx.md) covering these two aspects is currently [under review](https://github.com/nostr-protocol/nips/pull/268). In summary, the Dostr implementation can be summarised with the following pseudo-code.
+
+![](https://raw.githubusercontent.com/dostr-eth/resources/main/graphics/dostr.png)
 
 ### Private-key derivation
 
