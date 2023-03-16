@@ -30,7 +30,7 @@ Dostr allows Nostr to work with Ethereum-based wallets and leverage the rich UX 
 
 ## Is Dostr secure?
 
-The **Nostr-specific** private keys derived by Dostr (using the HMAC function) are **new** keys which have no connection to the Ethereum wallet that derived it. Users can import/export their new generated Nostr-specific private keys in other Nostr clients and continue to use the same ENS features without exposing their Ethereum wallet private keys.
+The **Nostr-specific** private keys derived by Dostr (using the HMAC function) are **new** keys which have no invertible connection to the Ethereum wallet that derived it. Users can import or export their new generated Nostr-specific private keys in other Nostr clients and continue to use the same ENS features without exposing their Ethereum wallet private keys.
 
 ## Current status
 
