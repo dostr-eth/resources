@@ -1,28 +1,28 @@
 ![Banner](https://raw.githubusercontent.com/dostr-eth/resources/main/graphics/banner.png)
 # Dostr Technical Design
 ![Icon](https://raw.githubusercontent.com/dostr-eth/resources/main/graphics/icon_smol.png)
-#### Authors:`sshmatrix`, `c0de4c0ffee`
-#### Links: [[GitHub](https://github.com/dostr-eth)]  [[.ETH](https://dostr.eth.limo)]  [[.XYZ](https://dostr.xyz)] [[Goerli]()]
+#### Authors: `sshmatrix`, `c0de4c0ffee`
+#### Links: [[GitHub](https://github.com/dostr-eth)]  [[.ETH](https://dostr.eth.limo)]  [[.XYZ](https://dostr.xyz)]
 ###### tags: `specification` `design` `architecture` `nostr` `dostr`
 # DOSTR 📡
 
 ## Abstract
 
-Dostr is an Ethereum-flavoured [Nostr](https://github.com/nostr-protocol/nostr#readme) client. Dostr is an optional Ethereum-native side-stack to Nostr which allows users to generate deterministic Nostr-specific private keys from Ethereum-native ECDSA signatures. This allows Nostr to function with Ethereum wallets and leverage properties of [ENS (Ethereum Name Service)](https://docs.ens.domains/) protocol in Dostr client infrastructure and vice-versa. Consequently, Dostr provides an optional side-stack of Ethereum-based services for Nostr users, e.g. allows them to use their ENS identity on Nostr or attach to [Helix2](https://github.com/helix-coupler/resources/blob/master/yellow-paper/README.md) as a submodule hook. Alternatively, Ethereum users may find that Dostr is a minimal implementation of [Sign In With X (SIWx)](https://chainagnostic.org/CAIPs/caip-122) - an alternative to SIWE.
+Dostr ('Dost' means 'friend' in Hindi, an adoption of 'Doost' from Farsi) is an Ethereum-flavoured [Nostr](https://github.com/nostr-protocol/nostr#readme) client. Dostr is a fully backward-compatible Nostr client with ENS and Ethereum integration. It's a collection of experimental specifications and implementations of Ethereum-aware Nostr clients to transfer signed data/messages, and transact between users and services.
+
+Ethereum was originally designed as a 3-in-1 protocol: Ethereum/EVM as **Consensus** mechanism, Swarm as **Storage** system and Whisper as **Messaging** protocol. Dostr is equivalent to Whisper in this grander vision outlined in the Ethereum whitepaper. Dostr client allows Nostr to function with Ethereum wallets ([SIWE](https://login.xyz/)) and leverage properties of [ENS](https://docs.ens.domains/), such as allowing users to import their ENS identity, avatars and other records on Nostr. Dostr is unsurprisingly a minimal implementation of [Sign In With X (SIWx)](https://chainagnostic.org/CAIPs/caip-122).
 
 ## Introduction
 
-Dostr is a Nostr client with Ethereum-based side-stack. To understand Dostr, one must understand Nostr. Nostr is a minimal peer-to-peer networking protocol with following properties:
+To understand Dostr, one must understand Nostr. Nostr is a minimal peer-to-peer networking protocol with following properties:
 
 - Nostr consists of **Clients**  and **Relays**. Clients are local instances run by users and relays are websocket servers which communicate between clients.
 - Nostr clients have the ability to talk to relays and make requests for filtered information, which the relay fetches from another client and returns to the original requester.
-- Nostr clients are identified by their private keys and may have a **Petname**. Nostr clients must sign the information they send and relays must validate the information before transmitting it.
+- Nostr clients are identified by their private keys and may have a **nickname**. Nostr clients must sign the information they send and relays must validate the information before transmitting it.
 
-![](https://raw.githubusercontent.com/dostr-eth/resources/main/graphics/nostr.png)
+More details about the Nostr protocol may be found [here](https://github.com/rajarshimaitra/rust-nostr/blob/main/VISION.md) (and [here](https://github.com/nostr-protocol/nips)). In native Nostr implementation, Schnorr signature scheme is used as per Bitcoin-native [BIP-340 standard](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki#design). Dostr adds to this standard by deriving the Nostr-specific private keys from Ethereum-native ECDSA signature scheme outlined in [EIP-191](https://eips.ethereum.org/EIPS/eip-191) and [EIP-712](https://eips.ethereum.org/EIPS/eip-712) using HMAC Key Derivation Function (HKDF). In Dostr clients, ENS names of the signing wallets become the usernames of the users and users may choose to import their ENS avatars and other records.
 
-More details about the Nostr protocol may be found [here](https://github.com/rajarshimaitra/rust-nostr/blob/main/VISION.md) (and [here](https://github.com/nostr-protocol/nips)). In native Nostr implementation, Schnorr signature scheme over `secp256k1` is used as per Bitcoin-native [BIP-340 standard](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki#design). Dostr adds to this standard by deriving the Nostr-specific private keys from Ethereum-native ECDSA signature scheme outlined in [EIP-191](https://eips.ethereum.org/EIPS/eip-191) and [EIP-712](https://eips.ethereum.org/EIPS/eip-712) using HMAC Key Derivation Function (HKDF). In Dostr clients, ENS names of the signing wallets become the petnames of the users.
-
-Implementing an Ethereum-based side-stack to Nostr has several utilities. Firstly, it allows Nostr to work with Ethereum-based wallets and leverage the rich UX of Ethereum ecosystem. For instance, most Ethereum-wallets implement ENS by default and Dostr is the first and only protocol that allows users to uitlise their [NIP-02](https://github.com/nostr-protocol/nips/blob/master/02.md) compatible ENS names on Nostr. Dostr further leverages properties of ENS such as its DNS resolution via a gateway (https://vitalik.eth.limo) to store [NIP-05](https://github.com/nostr-protocol/nips/blob/master/05.md) compatible public client information. The cross-chain utility of Dostr is not limited to ENS and extends beyond to other Ethereum-native naming and linking protocols such as (https://github.com/helix-coupler/resources/blob/master/yellow-paper/README.md) or [Woolball](https://woolball.xyz).
+Implementing an Ethereum-based side-stack to Nostr has several utilities. Firstly, it allows Nostr to work with Ethereum-based wallets and leverage the rich UX of Ethereum ecosystem. For instance, most Ethereum-wallets implement ENS by default and Dostr is the first and only protocol that allows users to uitlise their [NIP-02](https://github.com/nostr-protocol/nips/blob/master/02.md) compatible ENS names on Nostr. Dostr further leverages properties of ENS such as its DNS resolution via a gateway (https://vitalik.eth.limo) to store [NIP-05](https://github.com/nostr-protocol/nips/blob/master/05.md) compatible public client information on decentralised storage infrastructures such as IPFS, Arweave, Swarm etc. The cross-chain utility of Dostr is not limited to ENS and extends beyond to other Ethereum-native naming and linking protocols such as (https://github.com/helix-coupler/resources/blob/master/yellow-paper/README.md) or [Woolball](https://woolball.xyz).
 
 ## Protocol Design
 
