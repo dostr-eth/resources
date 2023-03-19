@@ -32,67 +32,18 @@ Dostr design is identitical to the Nostr specifications described in [NIP-01](ht
 
 ### Private-key derivation
 
-Dostr uses [HMAC-based Extract-and-Expand Key Derivation Function (HKDF)](https://datatracker.ietf.org/doc/html/rfc5869) coupled with `sha256`.
+Dostr uses [HMAC-based Extract-and-Expand Key Derivation Function (HKDF)](https://datatracker.ietf.org/doc/html/rfc5869) coupled with `sha256`. Key derivation is outlined in detail in [NIP-XX proposal](https://github.com/dostr-eth/nips/blob/ethkeygen/xx.md) and can be visually understood as follows:
 
-```js
-import { hkdf } from '@noble/hashes/hkdf';
-import { sha256 } from '@noble/hashes/sha256';
-import * as secp256k1 from '@noble/secp256k1';
+![](https://raw.githubusercontent.com/dostr-eth/resources/main/graphics/nip-xx.png)
 
-let username = 'petname@domain.eth.limo'; // chosen username as per NIP-02 and/or NIP-05
-let optPassword = "horse staple battery"; // optional password
-let address = wallet.getAddress(); // get checksum'd address from eth wallet
-let signature = wallet.signMessage(message); // request signature from eth wallet (v, r, s)
-let inputKey = sha256(signature);
-let salt = sha256(`nostr:${username}:${optPassword}:${signature.slice(68)}`); // generate salt with username, password & signature
-let info = `nostr:${username}:${address}`; // HKDF() arg
-let dkLen = 42; // HKDF() arg
-let hashKey = hkdf(sha256, inputKey, salt, info, dkLen); // calculate keyhash with HKDF function
-let privKey = nobleSecp256k1.hashToPrivateKey(hashKey); // private key from (keyhash ⊕ secp256k1)
-let pubKey = nobleSecp256k1.getPublicKey(privKey); // public key from (keyhash ⊕ secp256k1)
-```
+## How is Dostr helpful?
 
-#### a) `username`
+Dostr allows Nostr to work with Ethereum-based wallets and leverage the rich UX of Ethereum ecosystem. Dostr replaces the current web2 centralised dependencies in Nostr ecosystem (DNS and server storage) with web3 decentralised dependencies, e.g. ENS and IPFS respectively. In course of this, Dostr has unwittingly solved the problem of secure login into Nostr network from mobile devices. No universal Nostr mobile extensions existed until Dostr (Damus recently launched a Nostr client but for iOS only). In addition, most Ethereum-wallets implement ENS by default and Dostr is the first and only protocol that allows users to utilise their [NIP-02](https://github.com/nostr-protocol/nips/blob/master/02.md) compatible ENS names on Nostr. Dostr further leverages properties of ENS such as its DNS resolution via a gateway (https://vitalik.eth.LIMO) to store [NIP-05](https://github.com/nostr-protocol/nips/blob/master/05.md) compatible public user information on decentralised IPFS/IPNS storage.
 
-Nostr username can be either of the following:
+## Is Dostr secure?
 
-`petname` or `petname@domain.eth.limo` or `domain.eth.limo` or `sub.domain.eth.limo`, where,
+The **Nostr-specific** private keys derived by Dostr (using the HMAC function) are **new** keys which have no invertible connection to the Ethereum wallet that derived it. Users can import or export their new generated Nostr-specific private keys in other Nostr clients and continue to use the same ENS features without exposing their Ethereum wallet private keys.
 
-- `petname` is a name/identifier compatible with [NIP-02](https://github.com/nostr-protocol/nips/blob/master/02.md),
-- `petname@domain.eth.limo` is an identifier compatible with [NIP-05](https://github.com/nostr-protocol/nips/blob/master/05.md),
-- `domain.eth.limo` is [NIP-05](https://github.com/nostr-protocol/nips/blob/master/05.md) equivalent of `_@domain.eth.limo`, and
-- `sub.domain.eth.limo` is [NIP-05](https://github.com/nostr-protocol/nips/blob/master/05.md) equivalent of `_@sub.domain.eth.limo`.
+## Current status
 
-Note that `petname` can be the same as `domain`.
-
-#### b) `password`
-Password is optional value used in HKDF salt,
-```js
-let username = "petname@domain.eth.limo"
-let password = "horse staple battery"
-let signature = wallet.signMessage(message)
-let salt = sha256(`nostr:${username}:${password}:${signature.slice(68)}`);
-// generate password if none provided by user
-if(!password || password == ""){
-   salt = sha256(`nostr:${username}:${signature.slice(68)}`)
-}
-```
-
-#### c) `message`
-
-```js
-let message = `Login to Nostr as ${username}\n\nWARNING : DO NOT SIGN THIS REQUEST FROM UNTRUSTED NOSTR CLIENTS.\n${address}`
-```
-#### d) `signature`
-
-```js    
-let signature = wallet.signMessage(message); // request ECDSA signature from eth wallet in (v, r, s) struct
-```
-
-## Contracts
-
---
-
-## Discussion
-
---
+Dostr client UI is ready and the prototype test build can be accessed on [GitHub Pages](https://dostr-eth.github.io/homepage/). Dostr client is a fork of [Astral](https://astral.ninja/) (which is a fork of Branle), and it can already be used with generic Nostr keys. Developers are currently testing [SIWE interfacing](https://github.com/dostr-eth/nips/blob/ethkeygen/xx.md) with the UI while NIP-XX is under active review. The expected release date for the client is March 31 2023.
