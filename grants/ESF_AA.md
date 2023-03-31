@@ -14,8 +14,9 @@ Ethereum was originally designed as a 3-in-1 protocol: Ethereum/EVM as **Consens
 ## Grant Scope
 This grant is foreseen to cover development work on Dostr including but not limited to,
 
-a) enabling stealth payments, and
-b) smoothen and fully automatise ENS-IPFS-Swarm integration.
+**a)** enabling stealth payments, and
+
+**b)** smoothen and fully automatise ENS-IPFS-Swarm integration.
 
 The team has additional plans to interface/intergate Nostr relays with Chainlink's CCIP gateways to allow pushing transactions to different bundlers and/or mempools, including EIP-4337-like alt mempool. This core account abstraction research however doesn't fall under the scope of this grant and somewhat relies on the adoption of Dostr client. The team will deep dive into this only after the aforementioned goals a) & b) are achieved.
 
@@ -46,3 +47,11 @@ The costs associated with the grant will be used for primarily three purposes:
 - **Principle Developers' Costs**, covering basic cost of living for two developers.
 - **DevOps & Digital Infrastructure Costs**, covering protocol publicising, servers, possible on-boarding of a third member etc.
 - **Contract Deployment Costs**, for contract deployments on mainnet.
+
+# Links
+
+- [Dostr Client (web2)](https://dostr.xyz)
+- [Dostr Client (web3)](https://dostr.eth.limo)
+- [Dostr Specification Document (NIP-111)](https://github.com/dostr-eth/nips/blob/ethkeygen/111.md)
+- [Dostr Client Source Code](https://github.com/dostr-eth/dostr-client)
+- [Dostr Toolkit Source Code](https://github.com/dostr-eth/nostr-tools)
