@@ -6,7 +6,7 @@
 
 Dostr ('Dost' means 'friend' in Hindi, an adoption of 'Doost' from Farsi) is an Ethereum-flavoured [Nostr](https://github.com/nostr-protocol/nostr#readme) client. Dostr is a fully backward-compatible Nostr client with ENS and Ethereum integration. It's a collection of experimental specifications and implementations of Ethereum-aware Nostr clients to transfer signed data/messages, and transact between users and services.
 
-Ethereum was originally designed as a 3-in-1 protocol: Ethereum/EVM as **Consensus** mechanism, Swarm as **Storage** system and Whisper as **Messaging** protocol. Dostr is equivalent to Whisper in this grander vision outlined in the Ethereum whitepaper. Dostr client allows Nostr to function with Ethereum wallets ([SIWE](https://login.xyz/)) and leverage properties of [ENS](https://docs.ens.domains/), such as allowing users to import their ENS identity, avatars and other records on Nostr. Dostr is unsurprisingly a minimal implementation of [Sign In With X (SIWx)](https://chainagnostic.org/CAIPs/caip-122).
+Ethereum was originally designed as a 3-in-1 protocol: Ethereum/EVM as **Consensus** mechanism, Swarm as **Storage** system and Whisper as **Messaging** protocol. Dostr is equivalent to Whisper in this grander vision outlined in the Ethereum white paper. Dostr client allows Nostr to function with Ethereum wallets ([SIWE](https://login.xyz/)) and leverage properties of [ENS](https://docs.ens.domains/), such as allowing users to import their ENS identity, avatars and other records on Nostr. Dostr is unsurprisingly a minimal implementation of [Sign In With X (SIWx)](https://chainagnostic.org/CAIPs/caip-122).
 
 ## Introduction
 
@@ -22,7 +22,7 @@ More details about the Nostr protocol may be found [here](https://github.com/raj
 
 ![](https://raw.githubusercontent.com/dostr-eth/resources/main/graphics/dostr.png)
 
-Dostr design is identitical to the Nostr specifications described in [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md) except for two main differences - **a)** using ECDSA signatures to derive user keys, and **b)** use of ENS via a gateway to access the user properties instead of a web2 DNS server. The detailed [NIP-XX proposal](https://github.com/dostr-eth/nips/blob/ethkeygen/xx.md) covering these two aspects is currently [under review](https://github.com/nostr-protocol/nips/pull/268).
+Dostr design is identical to the Nostr specifications described in [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md) except for two main differences - **a)** using ECDSA signatures to derive user keys, and **b)** use of ENS via a gateway to access the user properties instead of a web2 DNS server. The detailed [NIP-111 proposal](https://github.com/dostr-eth/nips/blob/ethkeygen/111.md) covering these two aspects is currently [under review](https://github.com/nostr-protocol/nips/pull/268).
 
 ## How is Dostr helpful?
 
@@ -34,4 +34,4 @@ The **Nostr-specific** private keys derived by Dostr (using the HMAC function) a
 
 ## Current status
 
-Dostr client UI is ready and the prototype test build can be accessed on [GitHub Pages](https://dostr-eth.github.io/homepage/). Dostr client is a fork of [Astral](https://astral.ninja/) (which is a fork of Branle), and it can already be used with generic Nostr keys. Developers are currently testing [SIWE interfacing](https://github.com/dostr-eth/nips/blob/ethkeygen/xx.md) with the UI while NIP-XX is under active review. The expected release date for the client is March 31 2023.
+Dostr client UI is ready and the prototype test build can be accessed on [GitHub Pages](https://dostr-eth.github.io/homepage/). Dostr client is a fork of [Astral](https://astral.ninja/) (which is a fork of Branle), and it can already be used with generic Nostr keys. Developers are currently testing [SIWE interfacing](https://github.com/dostr-eth/nips/blob/ethkeygen/111.md) with the UI while NIP-111 is under active review. The expected release date for the client is March 31 2023.
