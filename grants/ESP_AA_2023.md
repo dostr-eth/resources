@@ -38,8 +38,8 @@ Dostr v1 at its core is an account abstraction specification in which a cryptogr
 ## Timeline
 The timeline for the project is simple and set at **6** months to achieve the two goals a) and b) outlined in the Grant Scope section. We expect
 
-- outcomes a) & b) to conclude at the end of Q2 2023, with
-- outcomes c) & d) to follow at the end of Q3 2023.
+- outcomes **a)** & **b)** to conclude at the end of Q2 2023, with
+- outcomes **c)** & **d)** to follow at the end of Q3 2023.
 
 ## Budget
 **Amount Requested:** $21,000

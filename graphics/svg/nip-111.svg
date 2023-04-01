@@ -14,8 +14,8 @@
    version="1.1"
    id="svg6"
    inkscape:version="1.0.2 (e86c8708, 2021-01-15)"
-   sodipodi:docname="nip-xx.svg"
-   inkscape:export-filename="/Users/sshmatrix/Idee/sshmatrix/Buidl/dostr/resources/graphics/nip-xx.png"
+   sodipodi:docname="nip-111.svg"
+   inkscape:export-filename="/Users/sshmatrix/Idee/sshmatrix/Buidl/dostr/resources/graphics/nip-111.png"
    inkscape:export-xdpi="300"
    inkscape:export-ydpi="300">
   <metadata
@@ -171,9 +171,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.73004305"
-     inkscape:cx="918.95037"
-     inkscape:cy="551.23051"
+     inkscape:zoom="0.6581373"
+     inkscape:cx="876.40606"
+     inkscape:cy="295.96463"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -1032,7 +1032,9 @@
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:SPOTNIK;-inkscape-font-specification:SPOTNIK;text-align:end;text-anchor:end;stroke:#000000;stroke-width:1.10163;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          x="356.26282"
          y="44.748932"
-         id="tspan2163-0-2-6">NIP-XX</tspan></text>
+         id="tspan2163-0-2-6">NIP-<tspan
+   style="font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;font-size:19.0094px;font-family:'SF Pro Rounded';-inkscape-font-specification:'SF Pro Rounded Ultra-Light'"
+   id="tspan1075">111</tspan></tspan></text>
     <text
        xml:space="preserve"
        id="text1200"
