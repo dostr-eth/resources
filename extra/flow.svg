@@ -70,7 +70,7 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.18164043"
+     inkscape:zoom="0.17468293"
      inkscape:cx="850.06258"
      inkscape:cy="529.20738"
      inkscape:document-units="mm"
@@ -170,25 +170,25 @@
        sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
-       style="font-size:16.5353px;line-height:1.25;font-family:Palatino;-inkscape-font-specification:Palatino;font-variant-ligatures:none;text-align:center;letter-spacing:-0.41043px;text-anchor:middle;stroke-width:0.295273"
-       x="8.2783127"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.5353px;line-height:1.25;font-family:'SF Mono';-inkscape-font-specification:'SF Mono';font-variant-ligatures:none;text-align:center;letter-spacing:-0.41043px;text-anchor:middle;stroke:#000000;stroke-width:0.295;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="-1.2466877"
        y="152.72836"
        id="text1528"><tspan
          sodipodi:role="line"
          id="tspan1526"
-         x="8.0730982"
+         x="-1.4519022"
          y="152.72836"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.5353px;font-family:'SF Pro Rounded';-inkscape-font-specification:'SF Pro Rounded';stroke-width:0.295273">PINATA</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.5353px;font-family:'SF Mono';-inkscape-font-specification:'SF Mono';stroke:#000000;stroke-width:0.295;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">PINATA</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:16.5353px;line-height:1.25;font-family:Palatino;-inkscape-font-specification:Palatino;font-variant-ligatures:none;text-align:center;letter-spacing:-0.41043px;text-anchor:middle;stroke-width:0.295273"
-       x="-112.06419"
+       style="font-size:16.5353px;line-height:1.25;font-family:Palatino;-inkscape-font-specification:Palatino;font-variant-ligatures:none;text-align:center;letter-spacing:-0.41043px;text-anchor:middle;stroke:#000000;stroke-width:0.295;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="-124.76419"
        y="230.25105"
        id="text1528-9"><tspan
          sodipodi:role="line"
          id="tspan1526-0"
-         x="-112.26941"
+         x="-124.96941"
          y="230.25105"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.5353px;font-family:'SF Pro Rounded';-inkscape-font-specification:'SF Pro Rounded';stroke-width:0.295273">dWebServices</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.5353px;font-family:'SF Mono';-inkscape-font-specification:'SF Mono';stroke:#000000;stroke-width:0.295;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">dWebServices</tspan></text>
   </g>
 </svg>
