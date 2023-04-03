@@ -1,6 +1,6 @@
 # Set NIP-05 identifier on ENS Domain via [RFC 8615](https://www.rfc-editor.org/rfc/rfc8615) `.well-known` standard
 
-##### author(s): `0xc0de4c0ffee`, `sshmatrix`
+#### author(s): `0xc0de4c0ffee`, `sshmatrix`
 
 ## Pre-requisites:
 
@@ -34,3 +34,7 @@ Please replace the placeholder `username`  appropriately and set your own Nostr 
 - **Pro Tip 3:** Use [Pinata](https://pinata.cloud) to host your directory for free and get its IPFS hash ([example](https://raw.githubusercontent.com/dostr-eth/resources/main/extra/pinata.png))
 
 🥳 Voila! This should work. You should now be NIP-05 verified on Nostr at `username@mydomain.eth.limo` 🎉
+
+#
+### Don't like this manual work?
+We expect to automate this entire procedure on Dostr app very soon! 🤞

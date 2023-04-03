@@ -1,6 +1,6 @@
 # Receive BTC over ⚡ Lightning Network to .eth LUD-06 identifier via [RFC 8615](https://www.rfc-editor.org/rfc/rfc8615) `.well-known` standard
 
-##### author(s): `0xc0de4c0ffee`, `sshmatrix`
+#### author(s): `0xc0de4c0ffee`, `sshmatrix`
 
 **Disclaimer:** Only tested with [ln.tips](https://ln.tips) Lightning wallet
 
@@ -46,3 +46,7 @@ Please replace the value of `username`, `mydomain.eth` and `lightning.wallet` ap
 - **Pro Tip 6:** Use [Pinata](https://pinata.cloud) to host your directory for free and get its IPFS hash ([example](https://raw.githubusercontent.com/dostr-eth/resources/main/extra/pinata.png))
 
 🥳 Voila! This should work. You should now be able to receive ⚡ Lightning BTC with your LUD-06 identifier `username@mydomain.eth.limo` 🎉
+
+#
+### Don't like this manual work?
+We expect to automate this entire procedure on Dostr app very soon! 🤞
