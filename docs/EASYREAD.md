@@ -1,6 +1,6 @@
 # Dostr: Ethereum-flavoured Nostr
 ![Icon](https://raw.githubusercontent.com/dostr-eth/resources/main/graphics/icon_smol.png)
-#### Links: [[Prototype](https://dostr-eth.github.io/homepage/)] [[GitHub](https://github.com/dostr-eth)]
+#### Links: [[.XYZ](https://dostr.xyz/)] [[.ETH](https://dostr.eth.limo/)] [[GitHub](https://github.com/dostr-eth)]
 
 # DOSTR 📡
 

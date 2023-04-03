@@ -1,8 +1,19 @@
-# CAIP-XX
+---
+caip: 111
+title: Sign-In-With-X
+description: Application-Specific Private Key Generation from Deterministic Wallet Signatures
+author(s): Avneet Singh (@sshmatrix), 0xc0de4c0ffee (@0xc0de4c0ffee)
+status: Draft
+type: Standard
+created: 2023-04-05
+updated: 2023-04-05
+---
 
-Application-Specific Private Key Generation from Deterministic Wallet Signatures (Sign-In-With-X)
+# CAIP-111
+
+Sign-In-With-X: Application-Specific Private Key Generation from Deterministic Wallet Signatures
 --
-`draft` `optional` `author:0xc0de4c0ffee` `author:sshmatrix`
+###### tags: `draft` `optional` `author:0xc0de4c0ffee` `author:sshmatrix`
 
 ## Abstract
 
