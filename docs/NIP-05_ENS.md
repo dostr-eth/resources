@@ -4,7 +4,7 @@
 
 ## Pre-requisites:
 
-**a)** Your [ENS domain](https://ens.domains) `mydomain.eth` and a public gateway, e.g. `.limo`
+**a)** Your [ENS domain](https://ens.domains) `mydomain.eth` accessible via a public gateway, e.g. `.limo`
 
 **b)** Your Nostr public key in hex format (must not start with `npub`)
 
@@ -37,4 +37,5 @@ Please replace the placeholder `username`  appropriately and set your own Nostr 
 
 #
 ### Don't like this manual work?
-We expect to automate this entire procedure on Dostr app very soon! 🤞
+We expect to automate this entire procedure on [Dostr](https://dostr.eth.limo) app very soon! 🤞
+#

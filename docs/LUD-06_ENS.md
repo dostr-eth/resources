@@ -49,4 +49,5 @@ Please replace the value of `username`, `mydomain.eth` and `lightning.wallet` ap
 
 #
 ### Don't like this manual work?
-We expect to automate this entire procedure on Dostr app very soon! 🤞
+We expect to automate this entire procedure on [Dostr](https://dostr.eth.limo) app very soon! 🤞
+#

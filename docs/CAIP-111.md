@@ -1,8 +1,8 @@
 ---
 caip: 111
-title: Sign-In-With-X
-description: Application-Specific Private Key Generation from Deterministic Wallet Signatures
-author(s): Avneet Singh (@sshmatrix), 0xc0de4c0ffee (@0xc0de4c0ffee)
+title: Sign-In-With-X-on-Y (SIWxy)
+description: Application-Specific Private Key Generation from Deterministic SIWx Signatures
+author(s): 0xc0de4c0ffee (@0xc0de4c0ffee), sshmatrix (@sshmatrix)
 status: Draft
 type: Standard
 created: 2023-04-05
@@ -11,35 +11,30 @@ updated: 2023-04-05
 
 # CAIP-111
 
-Sign-In-With-X: Application-Specific Private Key Generation from Deterministic Wallet Signatures
+Sign-In-With-X-on-Y (SIWxy): Application-Specific Keypair Generation from SIWx Signatures
 --
 ###### tags: `draft` `optional` `author:0xc0de4c0ffee` `author:sshmatrix`
 
 ## Abstract
 
-This specification provides an optional method for applications and wallet providers to generate deterministic private keys from chain-agnostic CAIP-122 Signatures (`Sign-In-With-X` specification). The keypairs generated using this specification are application-specific and do not expose the original signing keypair. The new private keys are derived using SHA-256 HMAC Key Derivation Function (HKDF) with username & password, CAIP-02 Blockchain ID & CAIP-10 Account ID Specification identifiers, and deterministic signatures from connected wallets as inputs.
+This specification is a proof-of-concept implementation for applications and wallet providers to generate deterministic private keys from chain-agnostic CAIP-122 Signatures (`Sign-In-With-X` specification). The keypairs generated using this specification are application-specific and do not expose the original signing keypair. The new private keys are derived using SHA-256 HMAC Key Derivation Function (HKDF) with username & password, CAIP-02 Blockchain ID & CAIP-10 Account ID Specification identifiers, and deterministic signatures from connected wallets as inputs.
 
 ## Introduction
 
-CAIP-111 at its core is an account abstraction specification in which a cryptographic signature calculated by one signing algorithm and its native keypair (e.g. [Bitcoin-native Schnorr algorithm](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki)) can be used to derive a deterministic cryptographic keypair for another signing algorithm (e.g. [Ethereum-native ECDSA algorithm](https://eips.ethereum.org/EIPS/eip-191)) using an appropriate singular (non-invertible) key derivation function. This specification particularly describes the case where the former and latter algorithms are Schnorr and ECDSA respectively, and the one-way adaptor from ECDSA to Schnorr keypair is HMAC-based Key Derivation Function ([HKDF](https://datatracker.ietf.org/doc/html/rfc586)).
+CAIP-111 at its core is an account abstraction specification implementing [RFC 6979](https://www.rfc-editor.org/rfc/rfc6979) in which a cryptographic signature calculated by one signing algorithm and its native keypair (e.g. [Bitcoin-native Schnorr algorithm](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki)) can be used to derive a deterministic cryptographic keypair for another signing algorithm using an appropriate singular (non-invertible) key derivation function. This specification particularly describes the case where the former and latter algorithms are [Bitcoin-native Schnorr algorithm](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki) and [Ethereum-native ECDSA algorithm](https://eips.ethereum.org/EIPS/eip-191) respectively, and the one-way adaptor from ECDSA to Schnorr keypair is HMAC-based Key Derivation Function ([HKDF](https://datatracker.ietf.org/doc/html/rfc586)). It is nonetheless trivial to invert this process and derive deterministic ECDSA keypairs from Schnorr signatures.
 
-NIP-111 specification originated from the desire to allow Nostr to function with widely popular Ethereum wallets such as Metamask and leverage the strong network effects of Ethereum ecosystem. The problem however lay in the fact that Nostr Protocol uses Bitcoin-native Schnorr algorithm for signing messages/data while Ethereum (and its wallets such as Metamask etc) uses ECDSA algorithm. The difference in two signing algorithms and respective signing keypairs is the exact technical incompatibility that this specification originally succeeded in resolving by enabling [Sign-In With Ethereum](https://login.xyz) (SIWE) on Nostr. The underlying schema however is fully capable of functioning as a chain-agnostic workflow and this improved draft reflects that property by using [CAIP](https://github.com/ChainAgnostic/CAIPs) (Chain-Agnostic Improvement Proposals) implementations.
+CAIP-111 specification originated from the desire to allow [Nostr network](https://nostr.com) to function with widely popular Ethereum wallets such as Metamask and leverage the strong network effects of Ethereum ecosystem. The problem however lay in the fact that Nostr protocol uses Schnorr algorithm for signing messages/data while Ethereum and its wallets use the more standard ECDSA algorithm. The difference in two signing algorithms and respective signing keypairs is the exact technical incompatibility that this specification originally succeeded in resolving through [NIP-111](https://github.com/dostr-eth/nips/blob/ethkeygen/111.md) by enabling Sign-In With Ethereum (SIWE) on Nostr network and birthing [Dostr - an Ethereum-flavoured Nostr](https://dostr.eth.limo) client. The underlying schema however is fully capable of functioning as a chain-agnostic workflow and this draft reflects that property by using [CAIP](https://github.com/ChainAgnostic/CAIPs) (Chain-Agnostic Improvement Proposals) implementations.
 
 ## Terminology
 
 ### a) Username
-`username` is either of the following:
-
-- `petname` is a [NIP-02](https://github.com/nostr-protocol/nips/blob/master/02.md) compatible name,
-- `petname@example.com` is a [NIP-05](https://github.com/nostr-protocol/nips/blob/master/05.md) identifier,
-- `example.com` is NIP-05 identifier `_@example.com`,
-- `sub.example.com` is NIP-05 identifier `_@sub.example.com`,
-
-such that
+`username` is any valid string,
 
 ```js
-let username = 'petname' || 'petname@example.com' || 'example.com' || 'sub.example.com'
+let username = 'alice@bob#hello_world'
 ```
+
+Individual applications may choose to set their own rules on usernames with respect to accepted formats and invalid characters etc.
 
 ### b) Password
 `password` is an optional `string` value used to salt the key derivation function (HKDF),
