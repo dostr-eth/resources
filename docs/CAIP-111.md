@@ -1,7 +1,7 @@
 ---
 caip: 111
-title: Sign-In-With-X-on-Y (SIWxy)
-description: Application-Specific Private Key Generation from Deterministic SIWx Signatures
+title: Sign-In-With-X-on-Y
+description: Application-specific Private Key Generation from Deterministic SIWx Signatures
 author(s): 0xc0de4c0ffee (@0xc0de4c0ffee), sshmatrix (@sshmatrix)
 status: Draft
 type: Standard
@@ -11,38 +11,45 @@ updated: 2023-04-05
 
 # CAIP-111
 
-Sign-In-With-X-on-Y (SIWxy): Application-Specific Keypair Generation from SIWx Signatures
+Sign-In-With-X-on-Y: Application-specific Keypair Generation from SIWx Signatures
 --
 ###### tags: `draft` `optional` `author:0xc0de4c0ffee` `author:sshmatrix`
 
 ## Abstract
 
-This specification is a proof-of-concept implementation for applications and wallet providers to generate deterministic private keys from chain-agnostic CAIP-122 Signatures (`Sign-In-With-X` specification). The keypairs generated using this specification are application-specific and do not expose the original signing keypair. The new private keys are derived using SHA-256 HMAC Key Derivation Function (HKDF) with username & password, CAIP-02 Blockchain ID & CAIP-10 Account ID Specification identifiers, and deterministic signatures from connected wallets as inputs.
+This specification is a proof-of-concept implementation for applications and wallet providers to generate deterministic private keys from chain-agnostic CAIP-122 signatures (`Sign-In-With-X` specification). The keypairs generated using this specification are application-specific and do not expose the original signing keypair. The new private keys are derived using SHA-256 HMAC Key Derivation Function (HKDF) with username & password, CAIP-02 Blockchain ID & CAIP-10 Account ID Specification identifiers, and deterministic signatures from connected wallets as inputs.
 
 ## Introduction
 
-CAIP-111 at its core is an account abstraction specification implementing [RFC 6979](https://www.rfc-editor.org/rfc/rfc6979) in which a cryptographic signature calculated by one signing algorithm and its native keypair (e.g. [Bitcoin-native Schnorr algorithm](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki)) can be used to derive a deterministic cryptographic keypair for another signing algorithm using an appropriate singular (non-invertible) key derivation function. This specification particularly describes the case where the former and latter algorithms are [Bitcoin-native Schnorr algorithm](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki) and [Ethereum-native ECDSA algorithm](https://eips.ethereum.org/EIPS/eip-191) respectively, and the one-way adaptor from ECDSA to Schnorr keypair is HMAC-based Key Derivation Function ([HKDF](https://datatracker.ietf.org/doc/html/rfc586)). It is nonetheless trivial to invert this process and derive deterministic ECDSA keypairs from Schnorr signatures.
+CAIP-111 at its core is an account abstraction specification in which a cryptographic signature calculated by one signing algorithm and its native keypair (e.g. [Bitcoin-native Schnorr algorithm](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki)) can be used to derive a deterministic cryptographic keypair for another signing algorithm using an appropriate singular (non-invertible) key derivation function. This specification particularly describes the case where the former and latter algorithms are [Bitcoin-native Schnorr algorithm](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki) and [Ethereum-native ECDSA algorithm](https://eips.ethereum.org/EIPS/eip-191) respectively, and the one-way adaptor from ECDSA to Schnorr keypair is HMAC-based Key Derivation Function ([HKDF](https://datatracker.ietf.org/doc/html/rfc586)). It is nonetheless trivial to invert this process and derive deterministic ECDSA keypairs from Schnorr signatures [?]. It is also trivial to extend this specification to work across elliptic curves other than `secp256k1`, for example from `secp256k1` signatures to `ed25519` private keys or vice-versa.
 
-CAIP-111 specification originated from the desire to allow [Nostr network](https://nostr.com) to function with widely popular Ethereum wallets such as Metamask and leverage the strong network effects of Ethereum ecosystem. The problem however lay in the fact that Nostr protocol uses Schnorr algorithm for signing messages/data while Ethereum and its wallets use the more standard ECDSA algorithm. The difference in two signing algorithms and respective signing keypairs is the exact technical incompatibility that this specification originally succeeded in resolving through [NIP-111](https://github.com/dostr-eth/nips/blob/ethkeygen/111.md) by enabling Sign-In With Ethereum (SIWE) on Nostr network and birthing [Dostr - an Ethereum-flavoured Nostr](https://dostr.eth.limo) client. The underlying schema however is fully capable of functioning as a chain-agnostic workflow and this draft reflects that property by using [CAIP](https://github.com/ChainAgnostic/CAIPs) (Chain-Agnostic Improvement Proposals) implementations.
+CAIP-111 specification originated from the desire to allow [Nostr network](https://nostr.com) to function with widely popular Ethereum wallets such as Metamask and leverage the strong network effects of Ethereum ecosystem. The problem however lay in the fact that Nostr protocol uses Schnorr algorithm on `secp256k1` for signing messages/data while Ethereum and its wallets use the more standard ECDSA algorithm on `secp256k1`. The difference in two signing algorithms and respective signing keypairs is the exact technical incompatibility that this specification originally succeeded in resolving through [NIP-111](https://github.com/dostr-eth/nips/blob/ethkeygen/111.md) by enabling Sign-In With Ethereum (SIWE) on Nostr network and birthing [Dostr - an Ethereum-flavoured Nostr](https://dostr.eth.limo) client. The underlying schema however is fully capable of functioning as a chain-agnostic workflow and this draft reflects that property by using [CAIP](https://github.com/ChainAgnostic/CAIPs) (Chain-Agnostic Improvement Proposals) implementations.
 
 ## Terminology
 
-### a) Username
-`username` is any valid string,
+### a) Application Identifier
+`appId` is an application identifier `string`,
 
 ```js
-let username = 'alice@bob#hello_world'
+let applicationId = 'uniswap-v3.1'
 ```
 
-Individual applications may choose to set their own rules on usernames with respect to accepted formats and invalid characters etc.
+### b) Username
+`username` is a user identifier `string`,
 
-### b) Password
+```js
+let username = 'alice'
+```
+
+Individual applications may choose to set their own rules on usernames, i.e. accepted formats and/or disallowed characters etc.
+
+### c) Password
 `password` is an optional `string` value used to salt the key derivation function (HKDF),
 ```js
 let password = "horse staple battery"
 ```
 
-## c) Chain-agnostic Identifiers
+## d) Chain-agnostic Identifiers
 Chain-agnostic [CAIP-02: Blockchain ID Specification](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md) and [CAIP-10: Account ID Specification](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md) schemes are used to generate blockchain and address identifiers `caip02` and `caip10` respectively,
 ```js
 let caip02 =
@@ -53,32 +60,32 @@ let caip02 =
 let caip10 = `${caip02}:<checksum_address>`;
 ```
 
-### d) Info
-`info` is CAIP-10 and NIP-02/NIP-05 identifier string formatted as:
+### e) Info
+`info` is CAIP-10 and the user identifier string formatted as:
  ```js
  let info = `${caip10}:${username}`;
  ```
 
-### e) Message
+### f) Message
 Deterministic `message` to be signed by the wallet provider,
 ```js
-let message = `Log into Nostr client as '${username}'\n\nIMPORTANT: Please verify the integrity and authenticity of connected Nostr client before signing this message\n\nSIGNED BY: ${info}`
+let message = `Log into ${applicationId} as '${username}'\n\nIMPORTANT: Please verify the integrity and authenticity of connected ${applicationId} client before signing this message\n\nSIGNED BY: ${info}`
 ```
 
-### f) Signature
+### g) Signature
 [RFC-6979](https://datatracker.ietf.org/doc/html/rfc6979) compatible (ECDSA) deterministic `signature` calculated by the wallet provider using native keypair,
 ```js
 let signature = wallet.signMessage(message);
 ```
-
-### g) Salt
+Implementations should ideally check the validity of signatures against RFC-6979 standard at the end of this step.
+### h) Salt
 `salt` is SHA-256 hash of the `info`, optional password and last **32 bytes** of signature string formatted as:
   ```js
   let salt = await sha256(`${info}:${password?password:""}:${signature.slice(68)}`);
   ```
   where, `signature.slice(68)` are the last 32 bytes of the deterministic ECDSA-derived Ethereum signature.
 
-### h) Key Derivation Function (KDF)
+### i) Key Derivation Function (KDF)
 HMAC-Based KDF `hkdf(sha256, inputKey, salt, info, dkLen = 42)` is used to derive the **42 bytes** long **hashkey** with inputs,
 
 - `inputKey` is SHA-256 hash of signature bytes,
@@ -112,24 +119,24 @@ HMAC-Based KDF `hkdf(sha256, inputKey, salt, info, dkLen = 42)` is used to deriv
 
 ## Architecture
 
-The resulting architecture of NIP-111 can be visually interpreted as follows:
+The resulting architecture of CAIP-111 can be visually interpreted as follows:
 
 ![](https://raw.githubusercontent.com/dostr-eth/resources/main/graphics/nip-xx.png)
 
 ## Implementation Requirements
 
-- Connected Ethereum wallet Signer **MUST** be EIP-191 and RFC-6979 compatible.
+- Input signatures **MUST** be RFC-6979 compatible.
 - The `message` **MUST** be string formatted as
 ```
-Login to Nostr as ${username}\n\nImportant: Please verify the integrity and authenticity of your Nostr client before signing this message.\n${caip10}`.
+`Log into ${applicationId} client as '${username}'\n\nIMPORTANT: Please verify the integrity and authenticity of connected ${applicationId} client before signing this message\n\nSIGNED BY: ${info}`
 ```
 - HKDF `inputKey` **MUST** be generated as the SHA-256 hash of 65 bytes long signature.
 - HKDF `salt` **MUST** be generated as SHA-256 hash of string
 ```
 ${info}:${username}:${password?password:""}:${signature.slice(68)}
 ```
-- HKDF Derived Key Length (`dkLen`) MUST be 42.
-- HKDF `info` MUST be string formatted as
+- HKDF Derived Key Length (`dkLen`) **MUST** be 42.
+- HKDF `info` **MUST** be string formatted as
 ```
 ${CAIP_10}:${address}:${username}
 ```
