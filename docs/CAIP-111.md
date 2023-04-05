@@ -116,12 +116,13 @@ HMAC-Based KDF `hkdf(sha256, inputKey, salt, info, dkLen = 42)` is used to deriv
    let privKey = secp256k1.utils.hashToPrivateKey(hashKey);
    let pubKey = secp256k1.schnorr.getPublicKey(privKey);
    ```
+   Applications may adopt a different hashkey → private key mapping at this step based on their requirement, e.g. to `ed25519` key instead of `secp256k1`.
 
 ## Architecture
 
 The resulting architecture of CAIP-111 can be visually interpreted as follows:
 
-![](https://raw.githubusercontent.com/dostr-eth/resources/main/graphics/nip-xx.png)
+![](https://raw.githubusercontent.com/dostr-eth/resources/main/graphics/caip-111.png)
 
 ## Implementation Requirements
 
@@ -135,7 +136,7 @@ The resulting architecture of CAIP-111 can be visually interpreted as follows:
 ```
 ${info}:${username}:${password?password:""}:${signature.slice(68)}
 ```
-- HKDF Derived Key Length (`dkLen`) **MUST** be 42.
+- HKDF-derived Key Length (`dkLen`) **MUST** be 42.
 - HKDF `info` **MUST** be string formatted as
 ```
 ${CAIP_10}:${address}:${username}
@@ -228,9 +229,8 @@ export async function signInWithX(
 ```
 
 ## Implementations
-1) Nostr Tools : [Sign-In-With-X](https://github.com/dostr-eth/nostr-tools/tree/siwx) ([Pull Request #132](https://github.com/nbd-wtf/nostr-tools/pull/132))
-2) Nostr Client: [Dostr](https://github.com/dostr-eth/dostr-client)
-
+1) Dostr Toolkit : [Sign-In-With-X](https://github.com/dostr-eth/nostr-tools/tree/siwx) | [Pull Request #132](https://github.com/nbd-wtf/nostr-tools/pull/132)
+2) Dostr Client: [GitHub](https://github.com/dostr-eth/dostr-client) | [XYZ](https://dostr.xyz/) | [ETH](https://dostr.eth.limo/)
 
 ## Security Considerations
 
